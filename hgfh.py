@@ -1,1 +1,1 @@
-print("Helov")
+print("He")
