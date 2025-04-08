@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-# Абстрактний клас
+
 class Animal(ABC):
     def __init__(self, name, age):
         self.name = name
