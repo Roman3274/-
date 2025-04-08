@@ -1,66 +1,43 @@
-class Product:
-    def init(self, name, price):
+from abc import ABC, abstractmethod
+
+# Абстрактний клас
+class Animal(ABC):
+    def __init__(self, name, age):
         self.name = name
-        self.price = price
+        self.age = age
 
-    def info(self):
-        return (f"{self.name}: ${self.price:.2f}")
-
-
-class Customer:
-    def init(self, name):
-        self.name = name
-        self.cart = []
-
-    def add_to_cart(self, product):
-        self.cart.append(product)
-        print(f"{product.name} додано до кошика.")
-
-    def show_cart(self):
-        if not self.cart:
-            print("Кошик порожній.")
-            return
-        total = sum(product.price for product in self.cart)
-        print(f"Кошик {self.name}:")
-        for product in self.cart:
-            print(f" - {product.info()}")
-        print(f"Загальна вартість: ${total:.2f}")
-
-
-apple = Product("Яблоко", 1.5)
-banana = Product("Банан", 2.0)
-customer = Customer("Іван")
-customer.add_to_cart(apple)
-customer.add_to_cart(banana)
-customer.show_cart()
-
-
-class Animal:
-    def init(self, name, sound):
-        self.name = name
-        self.sound = sound
-
+    @abstractmethod
     def make_sound(self):
-        print(f"{self.name} каже: {self.sound}")
+        pass
+
+    def get_info(self):
+        return f"Ім'я: {self.name}, Вік: {self.age}"
+
 
 
 class Dog(Animal):
-    def init(self, name):
-        super().init(name, "Гав-гав")
-
     def make_sound(self):
-        print(f"{self.name} (собака) каже: {self.sound}! Я добрий пес!")
+        return "Гав-гав!"
 
 
 class Cat(Animal):
-    def init(self, name):
-        super().init(name, "Мяу-мяу")
-
     def make_sound(self):
-        print(f"{self.name} (кіт) каже: {self.sound}! Я незалежний кіт!")
+        return "Няв-няв!"
 
 
-dog = Dog("Песик")
-cat = Cat("котик")
-dog.make_sound()
-cat.make_sound()
+class Parrot(Animal):
+    def make_sound(self):
+        return "Привіт!"
+
+
+animals = [
+    Dog("Барсик", 3),
+    Cat("Мурка", 2),
+    Parrot("Кеша", 4)
+]
+
+for animal in animals:
+    print(animal.get_info())
+    print("Каже:", animal.make_sound())
+    print("-" * 20)
+
